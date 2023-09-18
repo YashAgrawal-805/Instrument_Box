@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            align-items: center;
+            justify-content: center;
+            background-color: aqua;
+        }
+
+        .container {
+            display: flex;
+            align-self: center;
+        }
+
+        .instrument {
+            display: flex;
+            height: 100px;
+            width: 100px;
+            border-style: solid;
+            border-color: rgb(65, 185, 255);
+            border-radius: 20px;
+            margin: 20px;
+            justify-content: center;
+            align-items: center;
+            background-color: blue;
+            font-size: 20px;
+            color: aliceblue;
+            box-shadow: 3px 3px black;
+        }
+
+        .instrument:active {
+            box-shadow: inset 3px 3px black;
+        }
+
+        h1 {
+            display: flex;
+            position: absolute;
+            top: 10px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            color: rgb(0, 41, 177);
+        }
+    </style>
+</head>
+<body>
+    <h1>INSTRUMENT_PLAYER</h1>
+    <div class="container">
+        <button class="instrument" data-key="a">DRUM</button>
+        <button class="instrument" data-key="b">BELL</button>
+        <button class="instrument" data-key="c">FLUTE</button>
+    </div>
+    <script>
+        var instruments = document.querySelectorAll(".instrument");
+        document.querySelector("h1").innerHTML = instruments[2].innerHTML;
+        function playAudio(index) {
+            var audio = new Audio("sound/tom-" + index + ".mp3");
+            audio.play();
+        }
+
+        for (var i = 0; i < instruments.length; i++) {
+            instruments[i].addEventListener("click", function (index) {
+                return function () {
+                    playAudio(index);
+                };
+            }(i));
+        }
+
+        // Event listener to trigger "DRUM" button click when "a" key is pressed
+        document.addEventListener("keyup", function (ravi) {
+            if (ravi.key === "a") {
+                document.querySelector('[data-key="a"]').click();
+            }
+        });
+
+        // Event listener to trigger "BELL" button click when "b" key is pressed
+        document.addEventListener("keyup", function (ravi) {
+            if (ravi.key === "b") {
+                document.querySelector('[data-key="b"]').click();
+            }
+        });
+
+        // Event listener to trigger "FLUTE" button click when "c" key is pressed
+        document.addEventListener("keyup", function (ravi) {
+            if (ravi.key === "c") {
+                document.querySelector('[data-key="c"]').click();
+            }
+        });
+    </script>
+</body>
+</html>
